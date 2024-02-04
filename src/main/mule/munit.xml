@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="c4c5fe5b-5ba9-4c8c-9f20-c9500d1dec16" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="munitFlow" doc:id="fa4acf9f-8ffd-4c2f-8ac3-54437088d7de" >
+		<http:listener doc:name="Listener" doc:id="755eb2b6-ec8d-49f4-80d5-235d913db42b" config-ref="HTTP_Listener_config" path="/SampleMunit"/>
+		<logger level="INFO" doc:name="Logger" doc:id="a9cad83c-b0b9-4b73-adc5-695a9f22cf7e" message="received the request"/>
+		<ee:transform doc:name="Transform Message" doc:id="8bc96fa6-c3d8-4b82-9134-2f4747091f81" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	name: payload.firstname,
+	location:payload.location,
+	employment:payload.employementType
+	
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="afc1acdc-1175-4c05-915c-259df02c50c5" message="#[payload]"/>
+	</flow>
+</mule>
