@@ -30,6 +30,22 @@
 				<artifactId>mule-maven-plugin</artifactId>
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
+				     <configuration>
+						 <cloudHubDeployment>
+						     <uri>https://anypoint.mulesoft.com</uri>
+						     <muleVersion>4.5.3</muleVersion>
+						     <username>swethapatlolla6</username>
+						     <password>Shanmukh@2039</password>
+						     <applicationName>munit</applicationName>
+						     <environment>sandbox</environment>
+						     <workers>1</workers>
+						     <workerType>Micro</workerType>
+						     <objectStoreV2>true</objectStoreV2>
+						     <properties>
+						          <key>value</key>
+						     </properties>
+						</cloudHubDeployment>
+						</configuration>
 			</plugin>
 			<plugin>
 				<groupId>com.mulesoft.munit.tools</groupId>
@@ -109,13 +125,8 @@
 
 	<pluginRepositories>
 		<pluginRepository>
-			<id>mulesoft-releases</id>
-			<name>MuleSoft Releases Repository</name>
-			<layout>default</layout>
-			<url>https://repository.mulesoft.org/releases/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
+			<id>mule-public</id>
+			<url>https://repository.mulesoft.org/nexus/content/repositories/releases</url>
 		</pluginRepository>
 	</pluginRepositories>
 
